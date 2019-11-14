@@ -8,7 +8,7 @@
           <h3>{{ drink.strDrink }}</h3>
           <p>{{ drink.strAlcoholic }}</p>
           <button @click="singleCocktail(drink.idDrink)">View</button>
-          <button> Fav </button>
+          <button>fav</button>
         </li>
       </ul>
     </div>
@@ -17,11 +17,10 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Cocktail from '@/models/cocktail';
 import axios from 'axios';
 
 export default Vue.extend({
-
+  props: ['name'],
   data(): {drinkInfo: object} {
     return {
       drinkInfo: [],
@@ -30,24 +29,31 @@ export default Vue.extend({
   methods: {
     singleCocktail (id: number) {
       this.$router.push('/cocktail/' + id)
+    },
+    fetchResult (searchValue: string){
+      axios
+      .get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=' + searchValue)
+      .then((response) => (this.drinkInfo = response.data.drinks))
+      .catch((error) => console.log(error));
     }
   },
   mounted() {
-    axios
-      .get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
-      .then((response) => (this.drinkInfo = response.data.drinks))
-      .catch((error) => console.log(error));
+    this.fetchResult(this.name);
   },
-
+  watch: {
+      name (value){
+          this.fetchResult(value);
+      }
+  },
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .cocktailItem__thumb {
-    width: 100%;
+    width: 10vw;
   }
 
   .cocktailItem {
     background: grey;
   }
-</style> 
+</style>

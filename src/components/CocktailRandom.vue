@@ -18,12 +18,25 @@ import axios from 'axios';
 import Cocktail from '@/models/cocktail';
 
 export default Vue.extend({
-  props: ['id'],
   data() {
     return {
       cocktailItem: '',
       
     }
+  },
+  methods: {
+      fetchResult (){
+          axios
+            .get('https://www.thecocktaildb.com/api/json/v1/1/random.php')
+            .then((response) => {
+                this.cocktailItem = response.data.drinks;
+                this.cocktailItem = this.cocktailItem[0];
+                console.log(this.cocktailItem);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+      },
   },
   computed: {
     listIngredients: function (){
@@ -36,17 +49,13 @@ export default Vue.extend({
     }
   },
   mounted() {
-    axios
-      .get('https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=' + this.id)
-      .then((response) => {
-        this.cocktailItem = response.data.drinks;
-        this.cocktailItem = this.cocktailItem[0];
-        console.log(this.cocktailItem);
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    this.fetchResult();
   },
+  watch: {
+      random(){
+          this.fetchResult();
+      }
+  }
 });
 </script>
 
