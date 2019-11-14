@@ -31,7 +31,6 @@ export default Vue.extend({
       .filter(key => key.indexOf('Ingredient') >= 0)
       .reduce((filteredObj, key) => {
         filteredObj[key] = this.cocktailItem[key];
-        console.log(filteredObj);
         return filteredObj;
       }, {});
     }
