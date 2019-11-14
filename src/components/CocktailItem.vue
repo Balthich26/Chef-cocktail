@@ -4,10 +4,11 @@
     <h2>{{ cocktailItem.strDrink }}</h2>
     <p>{{ cocktailItem.strAlcoholic }}</p>
     <ul>
-      <li v-for="(info, name) in cocktailItem" :key="name" class="ingredient">
-          {{ info }}
+      <li v-for="(info, name) in listIngredients" :key="name" class="ingredient">
+          {{ console.log(listIngredients) }}
       </li>
     </ul>
+    <p><strong>Preparation:</strong>{{ cocktailItem.strInstructions }}</p>
   </main>
 </template>
 
@@ -20,11 +21,20 @@ export default Vue.extend({
   props: ['id'],
   data() {
     return {
-      cocktailItem: ''
+      cocktailItem: '',
+      
     }
   },
   computed: {
-    
+    listIngredients: function (){
+      Object.keys(this.cocktailItem)
+      .filter(key => key.indexOf('Ingredient') >= 0)
+      .reduce((filteredObj, key) => {
+        filteredObj[key] = this.cocktailItem[key];
+        console.log(filteredObj);
+        return filteredObj;
+      }, {});
+    }
   },
   mounted() {
     axios
@@ -32,6 +42,7 @@ export default Vue.extend({
       .then((response) => {
         this.cocktailItem = response.data.drinks;
         this.cocktailItem = this.cocktailItem[0];
+        console.log(this.cocktailItem);
       })
       .catch((error) => {
         console.log(error)
