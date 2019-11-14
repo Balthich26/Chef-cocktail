@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <header id="header__nav" class="nav-bars">
-      <h1>Chef Cocktail</h1>
-      <router-link to="/">Home</router-link>
-      <router-link to="/random">Chef Roulette</router-link>
+      <h1 id="bigTitle">Chef Cocktail</h1>
+      <router-link class="nav__item" to="/">Home</router-link>
+      <router-link class="nav__item" to="/random">Random</router-link>
       <input placeholder="Cocktail name" type="text" v-model="searchString">
       <button :disabled="!dataAvailable" @click="searchCocktail">Go</button>
     </header>
@@ -36,24 +36,46 @@ export default {
 </script>
 
 <style lang="scss">
+  body {
+    margin: 0;
+    padding: 0;
+  }
   #app {
           font-family: 'Avenir', Helvetica, Arial, sans-serif;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
           text-align: center;
           color: #2c3e50;
-          
+          margin: 0;
+          padding: 0;
+          max-width: 100%;
+          margin-top: 20vh;
 
+          li {
+            list-style: none;
+            margin-bottom: 7vh;
+          }
+
+          ul {
+            padding-inline-end: 40px;
+          }
           .nav-bars{
-              background: cornflowerblue;
+              background: black;
               position: fixed;
+              top: 0;
               width: 100%;
-              padding: 10px;
+              padding-bottom: 20px; 
               color: white;
 
               a {
-                  color: white;
+                  color: greenyellow;
                   text-decoration: none;
+                  margin-right: 5vw ;
+
+                  &:hover{
+                    cursor: pointer;
+                    color: red;
+                  }
               }
           }
 
