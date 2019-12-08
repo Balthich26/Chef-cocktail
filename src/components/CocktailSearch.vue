@@ -27,23 +27,23 @@ export default Vue.extend({
     };
   },
   methods: {
-    singleCocktail (id: number) {
-      this.$router.push('/cocktail/' + id)
+    singleCocktail(id: number) {
+      this.$router.push('/cocktail/' + id);
     },
-    fetchResult (searchValue: string){
+    fetchResult(searchValue: string) {
       axios
       .get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=' + searchValue)
       .then((response) => (this.drinkInfo = response.data.drinks))
       .catch((error) => console.log(error));
-    }
+    },
   },
   mounted() {
     this.fetchResult(this.name);
   },
   watch: {
-      name (value){
+      name(value) {
           this.fetchResult(value);
-      }
+      },
   },
 });
 </script>
