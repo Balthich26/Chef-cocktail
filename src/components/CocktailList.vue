@@ -8,7 +8,7 @@
           <h3>{{ drink.strDrink }}</h3>
           <p>{{ drink.strAlcoholic }}</p>
           <button @click="singleCocktail(drink.idDrink)">View</button>
-          <button>Fav</button>
+          <button @click="addFav(drink)">Fav</button>
         </li>
       </ul>
     </div>
@@ -29,7 +29,26 @@ export default Vue.extend({
   methods: {
     singleCocktail(id: number) {
       this.$router.push("/cocktail/" + id);
-    }
+    },
+    addFav(drink: Object): void{
+      this.$store.dispatch('cocktails/addFav', {
+        id: drink[0],
+        name: drink[1],
+        thumb: drink[20],
+        steps: drink[14],
+        alcoholic: drink[12],
+        ingredient1: drink[21],
+        ingredient2: drink[22],
+        ingredient3: drink[23],
+        ingredient4: drink[24],
+        ingredient5: drink[25],
+        ingredient6: drink[26],
+        ingredient7: drink[27],
+        ingredient8: drink[28],
+        ingredient9: drink[29],
+        ingredient10: drink[30],
+      });
+    },
   },
   mounted() {
     axios
