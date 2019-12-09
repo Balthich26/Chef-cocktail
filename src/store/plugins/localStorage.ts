@@ -4,12 +4,12 @@ import { Plugin } from 'vuex';
 const localStoragePlugin: Plugin<{ cocktails: { cocktails: Cocktail[] } }> = (store) => {
   store.subscribe((mutation, state) => {
     switch (mutation.type) {
-      case 'cocktails/addFav':
+      case 'favorits/addFav':
       /*case 'todos/removeDone':*/
         localStorage.setItem(
           'cocktails',
           JSON.stringify(
-            state.cocktails,
+            state.cocktails.cocktails,
           ),
         );
         break;

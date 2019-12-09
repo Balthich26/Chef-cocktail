@@ -7,7 +7,7 @@
           <img :src="drink.strDrinkThumb" class="cocktailItem__thumb" />
           <h3>{{ drink.strDrink }}</h3>
           <p>{{ drink.strAlcoholic }}</p>
-          <button @click="singleCocktail(drink.idDrink)">View</button>
+          <button class="cocktailItem__buttonSingle" @click="singleCocktail(drink.idDrink)">View</button>
           <button @click="addFav(drink)">Fav</button>
         </li>
       </ul>
@@ -30,8 +30,8 @@ export default Vue.extend({
     singleCocktail(id: number) {
       this.$router.push("/cocktail/" + id);
     },
-    addFav(drink: Object): void{
-      this.$store.dispatch('cocktails/addFav', {
+    addFav(drink: Array<any>): void{
+      this.$store.dispatch('addFav', {
         id: drink[0],
         name: drink[1],
         thumb: drink[20],
@@ -65,6 +65,6 @@ export default Vue.extend({
 }
 
 .cocktailItem {
-  background: grey;
+  background: greenyellow;
 }
 </style> 

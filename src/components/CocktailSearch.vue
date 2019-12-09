@@ -50,10 +50,10 @@ export default Vue.extend({
 
 <style lang="scss">
   .cocktailItem__thumb {
-    width: 10vw;
+    width: 100%;
   }
 
   .cocktailItem {
-    background: grey;
+    background: greenyellow;
   }
 </style>

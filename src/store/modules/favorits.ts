@@ -1,7 +1,6 @@
 import Cocktail from '@/models/cocktail';
 import { Module } from 'vuex';
-//favCocktails = savedTodos
-//cocktails = todos
+
 function getFromLocalStorage(): Cocktail[] {
   const favCocktails: string | null = localStorage.getItem('cocktails');
 
