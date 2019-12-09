@@ -3,8 +3,9 @@
     <img class="cocktailItem__thumb" :src="cocktailItem.strDrinkThumb" alt="Votre cocktail:" />
     <h2>{{ cocktailItem.strDrink }}</h2>
     <p>{{ cocktailItem.strAlcoholic }}</p>
+    <button v-on:click="reload()">ingredients</button>
     <ul>
-      <li v-for="(info, index) in listIngredients" :key="index" class="ingredient">{{ info }}</li>
+      <li v-bind:key="JSON.stringify(info)" v-for="info in ingredientsList"  class="ingredient">{{ info }}</li>
     </ul>
     <p>
       <strong>Preparation:</strong>
@@ -22,18 +23,25 @@ export default Vue.extend({
   props: ["id"],
   data() {
     return {
-      cocktailItem: ""
+      cocktailItem: '',
+      ingredientsList: {},
     };
+  },
+  methods: {
+    reload: function() {
+      window.location.reload();
+    }
   },
   computed: {
     listIngredients: function() {
       Object.keys(this.cocktailItem)
-        .filter(key => key.indexOf("Ingredient") >= 0)
+        .filter((key) => key.indexOf("Ingredient") >= 0)
         .reduce((filteredObj, key) => {
-          filteredObj[key] = this.cocktailItem[key];
+          (filteredObj as any)[key] = this.cocktailItem[key];
+          Vue.set(this.ingredientsList, key, filteredObj[key]);
           return filteredObj;
         }, {});
-    }
+    },
   },
   mounted() {
     axios
@@ -43,10 +51,10 @@ export default Vue.extend({
       .then(response => {
         this.cocktailItem = response.data.drinks;
         this.cocktailItem = this.cocktailItem[0];
-        console.log(this.cocktailItem);
+        
       })
       .catch(error => {
-        console.log(error);
+        console.error(error);
       });
   }
 });

@@ -21,7 +21,7 @@ import Cocktail from "@/models/cocktail";
 export default Vue.extend({
   data() {
     return {
-      cocktailItem: "",
+      cocktailItem: '',
       ingredientsList: {},
     };
   },
@@ -34,20 +34,20 @@ export default Vue.extend({
           this.cocktailItem = this.cocktailItem[0];
         })
         .catch(error => {
-          console.log(error);
+          console.error(error);
         });
     },
   },
   computed: {
     listIngredients: function() {
       Object.keys(this.cocktailItem)
-        .filter(key => key.indexOf("Ingredient") >= 0)
+        .filter((key) => key.indexOf("Ingredient") >= 0)
         .reduce((filteredObj, key) => {
           (filteredObj as any)[key] = this.cocktailItem[key];
-          this.ingredientsList = filteredObj;
+          Vue.set(this.ingredientsList, key, filteredObj[key]);
           return filteredObj;
         }, {});
-    }
+    },
   },
   mounted() {
     this.fetchResult();
@@ -55,8 +55,8 @@ export default Vue.extend({
   watch: {
     random() {
       this.fetchResult();
-    }
-  }
+    },
+  },
 });
 </script>
 

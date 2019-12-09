@@ -12,19 +12,19 @@
 export default {
   data() {
     return {
-      searchString: ""
+      searchString: '',
     };
   },
   methods: {
     searchCocktail() {
-      this.$router.push("/search/" + this.searchString);
-      this.searchString = "";
-    }
+      this.$router.push('/search/' + this.searchString);
+      this.searchString = '';
+    },
   },
   computed: {
     dataAvailable() {
-      return this.searchString !== null && this.searchString !== "";
-    }
-  }
+      return this.searchString !== null && this.searchString !== '';
+    },
+  },
 };
 </script>
