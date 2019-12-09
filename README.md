@@ -1,5 +1,8 @@
 # chefcocktail
 
+La fonctionalité 'Favoris' est implémentée dans le code mais pas fonctionelle, malgré mes recherches. 
+
+
 ## Project setup
 ```
 npm install
