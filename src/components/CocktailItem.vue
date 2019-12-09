@@ -1,11 +1,21 @@
 <template>
   <main>
-    <img class="cocktailItem__thumb" :src="cocktailItem.strDrinkThumb" alt="Votre cocktail:" />
+    <img
+      class="cocktailItem__thumb"
+      :src="cocktailItem.strDrinkThumb"
+      alt="Votre cocktail:"
+    />
     <h2>{{ cocktailItem.strDrink }}</h2>
     <p>{{ cocktailItem.strAlcoholic }}</p>
     <button v-on:click="reload()">ingredients</button>
     <ul>
-      <li v-bind:key="JSON.stringify(info)" v-for="info in ingredientsList"  class="ingredient">{{ info }}</li>
+      <li
+        v-bind:key="JSON.stringify(info)"
+        v-for="info in ingredientsList"
+        class="ingredient"
+      >
+        {{ info }}
+      </li>
     </ul>
     <p>
       <strong>Preparation:</strong>
@@ -15,12 +25,12 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import axios from "axios";
-import Cocktail from "@/models/cocktail";
+import Vue from 'vue';
+import axios from 'axios';
+import Cocktail from '@/models/cocktail';
 
 export default Vue.extend({
-  props: ["id"],
+  props: ['id'],
   data() {
     return {
       cocktailItem: '',
@@ -30,12 +40,12 @@ export default Vue.extend({
   methods: {
     reload: function() {
       window.location.reload();
-    }
+    },
   },
   computed: {
     listIngredients: function() {
       Object.keys(this.cocktailItem)
-        .filter((key) => key.indexOf("Ingredient") >= 0)
+        .filter((key) => key.indexOf('Ingredient') >= 0)
         .reduce((filteredObj, key) => {
           (filteredObj as any)[key] = this.cocktailItem[key];
           Vue.set(this.ingredientsList, key, filteredObj[key]);
@@ -46,17 +56,16 @@ export default Vue.extend({
   mounted() {
     axios
       .get(
-        "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + this.id
+        'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=' + this.id,
       )
-      .then(response => {
+      .then((response) => {
         this.cocktailItem = response.data.drinks;
         this.cocktailItem = this.cocktailItem[0];
-        
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
-  }
+  },
 });
 </script>
 
@@ -64,4 +73,4 @@ export default Vue.extend({
 .cocktailItem__thumb {
   width: 100vw;
 }
-</style> 
+</style>

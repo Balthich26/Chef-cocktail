@@ -5,13 +5,13 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import CocktailList from "@/components/CocktailList.vue";
+import Vue from 'vue';
+import CocktailList from '@/components/CocktailList.vue';
 
 export default Vue.extend({
-  name: "home",
+  name: 'home',
   components: {
-    CocktailList
-  }
+    CocktailList,
+  },
 });
 </script>

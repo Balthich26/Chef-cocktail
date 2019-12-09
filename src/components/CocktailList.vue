@@ -3,11 +3,20 @@
     <h2>Cocktail List</h2>
     <div class="cocktailList__container">
       <ul class="cocktailList">
-        <li v-for="drink in drinkInfo" :key="drink.idDrink" class="cocktailItem">
+        <li
+          v-for="drink in drinkInfo"
+          :key="drink.idDrink"
+          class="cocktailItem"
+        >
           <img :src="drink.strDrinkThumb" class="cocktailItem__thumb" />
           <h3>{{ drink.strDrink }}</h3>
           <p>{{ drink.strAlcoholic }}</p>
-          <button class="cocktailItem__buttonSingle" @click="singleCocktail(drink.idDrink)">View</button>
+          <button
+            class="cocktailItem__buttonSingle"
+            @click="singleCocktail(drink.idDrink)"
+          >
+            View
+          </button>
           <button @click="addFav(drink)">Fav</button>
         </li>
       </ul>
@@ -16,9 +25,9 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Cocktail from "@/models/cocktail";
-import axios from "axios";
+import Vue from 'vue';
+import Cocktail from '@/models/cocktail';
+import axios from 'axios';
 
 export default Vue.extend({
   data(): { drinkInfo: object } {
@@ -28,9 +37,9 @@ export default Vue.extend({
   },
   methods: {
     singleCocktail(id: number) {
-      this.$router.push("/cocktail/" + id);
+      this.$router.push('/cocktail/' + id);
     },
-    addFav(drink: Array<any>): void{
+    addFav(drink: any[]): void {
       this.$store.dispatch('addFav', {
         id: drink[0],
         name: drink[1],
@@ -52,10 +61,10 @@ export default Vue.extend({
   },
   mounted() {
     axios
-      .get("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=")
-      .then(response => (this.drinkInfo = response.data.drinks))
-      .catch(error => console.log(error));
-  }
+      .get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+      .then((response) => (this.drinkInfo = response.data.drinks))
+      .catch((error) => console.log(error));
+  },
 });
 </script>
 
@@ -67,4 +76,4 @@ export default Vue.extend({
 .cocktailItem {
   background: greenyellow;
 }
-</style> 
+</style>

@@ -17,10 +17,26 @@ const cocktails: Module<{ cocktails: Cocktail[] }, any> = {
     },
   },
   mutations: {
-    addFav(state, payload: { id: number, name: string, thumb: string, steps: string, alcoholic: string, ingredient1?: string,
-                             ingredient2?: string, ingredient3?: string, ingredient4?: string, ingredient5?: string,
-                             ingredient6?: string, ingredient7?: string, ingredient8?: string, ingredient9?: string,
-                             ingredient10?: string,}) {
+    addFav(
+      state,
+      payload: {
+        id: number;
+        name: string;
+        thumb: string;
+        steps: string;
+        alcoholic: string;
+        ingredient1?: string;
+        ingredient2?: string;
+        ingredient3?: string;
+        ingredient4?: string;
+        ingredient5?: string;
+        ingredient6?: string;
+        ingredient7?: string;
+        ingredient8?: string;
+        ingredient9?: string;
+        ingredient10?: string;
+      },
+    ) {
       state.cocktails.push(payload);
     },
     /*removeFav(state) {

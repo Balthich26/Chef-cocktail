@@ -6,12 +6,12 @@
 </template>
 
 <script lang="ts">
-import AppHeader from "@/components/AppHeader.vue";
+import AppHeader from '@/components/AppHeader.vue';
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    AppHeader: AppHeader
-  }
+    AppHeader: AppHeader,
+  },
 };
 </script>
 
@@ -21,7 +21,7 @@ body {
   padding: 0;
 }
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
